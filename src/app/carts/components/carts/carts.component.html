@@ -1,0 +1,68 @@
+  <div >
+    <h1>Product Cart</h1>
+  </div>
+<div class=" d-flex justify-content-between">
+  <div >
+    <h3 class="label-form">You have <label class="text-danger"> {{getCart.length}}</label> Cart</h3>
+  </div>
+  <div >
+    <button class="btn btn-danger" (click)="deleteAll()">Delete All Carts</button>
+  </div>
+</div>
+
+<table class="table table table-striped table-hover table-responsive">
+  <thead>
+    <tr>
+      <th scope="col">index</th>
+
+      <th scope="col ">Image</th>
+
+      <div class=" d-flex justify-content-center">
+        <th scope="col "><label>Title</label></th>
+      </div>
+      <th scope="col d-flex justify-content-center" ><label>Quantity</label></th>
+      <th scope="col">Price</th> 
+      <th>Delete</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cart of getCart;let rowIndex=index">
+      <th scope="row">{{rowIndex+1}}</th>
+      <td style="width: 60px;height: 60px;"><img src="{{cart.item.image}}" class="img-fluid rounded-circle"></td>
+
+      <td>
+        <div class="d-flex justify-content-center">
+          <label>{{cart.item.title}}</label>
+        </div>
+      </td>
+
+      <td>
+        <div class="d-flex  align-items-center">
+          <button [disabled]="disableAdd" style="width: fit-content;border: 0;">
+            <i class="fa-solid fa-square-plus me-2 fa-xl text-primary" (click)="addQuantity(rowIndex)">
+            </i>
+          </button>
+          <input class="form-control w-50" type="number" [value]="cart.quantity" >
+          <button [disabled]="disableMin" style="width: fit-content;border: 0;"  (click)="minusQuantity(rowIndex)"
+           > 
+            <i class="fa-solid fa-square-minus ms-2 fa-xl "
+            [ngClass]="{'text-primary': cart.quantity >1 , 'text-danger' :cart.quantity<=1 }" >
+            </i>
+          </button>
+        </div>
+      </td>
+      <td>{{cart.item.price}}</td> 
+      <td><button class="btn btn-danger" (click)="delete(rowIndex)">Delete</button></td>
+
+    </tr>
+  </tbody>  
+</table>
+<div class="d-flex justify-content-end align-items-center">
+  <strong class="me-2">Total Price: </strong>
+  <label class="text-danger me-4">{{totalPrice}}</label>
+  <button class="btn btn-success" (click)="addCart()">Order Now</button>
+</div>  
+<div class="text-success w-75" *ngIf="successAdd">
+  <h4 class="py-4">Your cart have been added successfully</h4>
+</div>

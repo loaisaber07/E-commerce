@@ -1,0 +1,55 @@
+<div class="container mt-5">
+    <div class="row justify-content-between">
+        <div class="col-3 me-2">
+            <img src="{{getProductDetails.image}}" alt="produc image" class="img-fluid">
+        </div>
+        <div class="col-8 align-content-center ">
+            <div style="text-align: center;" class="mb-4">
+
+                <strong class="label-control">{{getProductDetails.title}}</strong>
+            </div>
+            <label class="label-control mb-2"><b>Description :</b>{{getProductDetails.description}}</label>
+
+            <div class="mb-2">
+                <label class="label-control"><b>Catageory :</b> {{getProductDetails.category}}</label>
+            </div>
+            <div class="mb-2">
+                <label class="label-control"><b>Count :</b>{{getProductDetails.rating.count}}</label>
+            </div>
+            <div class="mb-2">
+                <label class="label-control"><b>Price :</b>{{getProductDetails.price}} LE</label>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-6  ">
+        <div class="col-12 d-flex justify-content-end align-content-center ">
+            <strong class="me-1">Rating :</strong>
+            <ng-template [ngIf]="(getProductDetails.rating.rate >=1 && getProductDetails.rating.rate <2)">
+                <i class="fa-solid fa-star" style="color: gold;" *ngFor="let i of getStarNumber(1)"></i>
+            </ng-template>
+            <ng-template [ngIf]="(getProductDetails.rating.rate >=2 && getProductDetails.rating.rate <3)">
+                <i class="fa-solid fa-star" style="color: gold;" *ngFor="let i of getStarNumber(2)"></i>
+            </ng-template>
+            <ng-template [ngIf]="(getProductDetails.rating.rate >=3 && getProductDetails.rating.rate <4)">
+                <i class="fa-solid fa-star" style="color: gold;" *ngFor="let i of getStarNumber(3)"></i>
+            </ng-template>
+            <ng-template [ngIf]="(getProductDetails.rating.rate >=4 && getProductDetails.rating.rate <5)">
+                <i class="fa-solid fa-star" style="color: gold;" *ngFor="let i of getStarNumber(4)"></i>
+            </ng-template>
+            <ng-template [ngIf]="(getProductDetails.rating.rate ==5)">
+                <i class="fa-solid fa-star" style="color: gold;" *ngFor="let i of getStarNumber(5)"></i>
+            </ng-template>
+        </div>
+    </div>
+    <div></div>
+    <div class="row ">
+        <div class="col-12 d-flex justify-content-start mt-10">
+            <a class="btn bg-danger-subtle rounded-pill w-50 " *ngIf="!addCheck" (click)="addCheck=true">Add To
+                Card</a>
+            <div class="w-50 d-flex" *ngIf="addCheck">
+                <input class="form-control" [(ngModel)]="amount">
+                <a class="btn btn-danger" (click)="addToCart({item:getProductDetails ,quantity:amount})">ADD</a>
+            </div>
+        </div>
+    </div>
+</div>

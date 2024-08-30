@@ -1,0 +1,35 @@
+<div class="container-fluid mt-5    ">
+    <div class=" my-5 d-flex justify-content-end">
+        <select class="w-25 rounded-pill form-control" [(ngModel)]="selectedCat" (ngModelChange)="productList($event)">
+            <option value="null" selected>All Product</option>
+            <ng-container *ngFor="let cat of getAllCategory">
+                <option [value]=cat> {{cat}}</option>
+            </ng-container>
+
+        </select>
+    </div>
+    <div class="container-fluid ">
+        <div class="row row-cols-1 row-cols-sm-2   row-cols-md-4  py-4 justify-content-between " >
+            <div class="card col  card-style mb-5 me-3 p-4" *ngFor="let prd of getAllProduct" >
+                <div routerLink="/Details/{{prd.id}}">
+                    <img src="{{prd.image}}" class="card-img-top mx-auto" alt="..." style="width: 200px;height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="height: 100px;">{{prd.title|prod}}</h5>
+                        <p class="card-text" style="height: 100px;">{{prd.description|prod }}</p>
+                    </div>
+                </div>
+                    <div class="d-flex justify-content-between ">
+                        <a class="btn bg-primary-subtle rounded-pill" *ngIf="!addCheck" (click)="addCheck=true">Add To
+                            Card</a>
+                        <div class="w-50 d-flex" *ngIf="addCheck">
+                            <input class="form-control" [(ngModel)]="amount">
+                            <a class="btn btn-danger" (click)="addToCart({item:prd,quantity:amount})">ADD</a>
+                        </div>
+                        <a   class="btn btn-danger rounded-pill">{{prd.price}}</a>
+                    </div>
+               
+            </div>
+
+        </div>
+    </div>
+</div>
